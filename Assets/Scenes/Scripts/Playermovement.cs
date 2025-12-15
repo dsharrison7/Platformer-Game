@@ -7,15 +7,31 @@ public class Playermovement : MonoBehaviour
     public float rotationSpeed;
     public float jumpSpeed;
     private float ySpeed;
+
+    public AudioSource audioSource;
+    public AudioClip soundClip;
+
+
     private CharacterController controller;
 
     void Start()
     {
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
+
         controller = GetComponent<CharacterController>();
     }
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (audioSource != null && soundClip != null)
+                audioSource.PlayOneShot(soundClip);
+        }
+
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = Input.GetAxis("Vertical");
 
